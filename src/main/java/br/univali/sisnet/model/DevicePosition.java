@@ -1,7 +1,7 @@
 
 package br.univali.sisnet.model;
 
-import br.univali.sisnet.persistence.PointToJsonSerializer;
+import br.univali.sisnet.serialization.PointToJsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Point;
 import java.io.Serializable;
@@ -33,7 +33,7 @@ public class DevicePosition implements Serializable {
     @Column(nullable = false)
     @Type(type = "org.hibernate.spatial.GeometryType")
     @JsonSerialize(using = PointToJsonSerializer.class)
-    private Point location;
+    private Point coordinates;
 
     @Column(name = "send_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,12 +55,12 @@ public class DevicePosition implements Serializable {
         this.deviceId = deviceId;
     }
 
-    public Point getLocation() {
-        return location;
+    public Point getCoordinates() {
+        return coordinates;
     }
 
-    public void setLocation(Point location) {
-        this.location = location;
+    public void setCoordinates(Point coordinates) {
+        this.coordinates = coordinates;
     }
 
     public Calendar getDate() {

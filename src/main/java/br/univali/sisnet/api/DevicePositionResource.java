@@ -1,13 +1,13 @@
 
 package br.univali.sisnet.api;
 
-import br.univali.sisnet.api.schema.DevicePositionSchema;
 import br.univali.sisnet.model.DevicePosition;
 import br.univali.sisnet.persistence.DevicePositionDAO;
 import br.univali.sisnet.util.GeometryUtil;
 import com.vividsolutions.jts.geom.Point;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,23 +21,23 @@ public class DevicePositionResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response savePosition (DevicePositionSchema data) {
+    public Response savePosition (Map<String, String> data) {
 
-        if (data.latitude == null && data.longitude == null) {
+        if (data.get("latitude") == null || data.get("longitude") == null) {
             throw new IllegalArgumentException("Latitude ou longitude inválidas.");
         }
 
         DevicePosition position = new DevicePosition();
 
-        position.setDeviceId(data.deviceId);
+        position.setDeviceId(data.get("deviceId"));
         position.setDate(Calendar.getInstance());
 
         Point point = GeometryUtil.latLongToPoint(
-            data.latitude,
-            data.longitude
+            Float.parseFloat(data.get("latitude")),
+            Float.parseFloat(data.get("longitude"))
         );
 
-        position.setLocation(point);
+        position.setCoordinates(point);
 
         DevicePositionDAO dao = DevicePositionDAO.getInstance();
         dao.persist(position);
@@ -53,11 +53,7 @@ public class DevicePositionResource {
         DevicePositionDAO dao = DevicePositionDAO.getInstance();
 
         List<DevicePosition> list = dao.findAll();
-
-        for (DevicePosition devicePosition : list) {
-            System.out.println(devicePosition.getId());
-        }
-
+        
         return Response.ok(list).build();
 
     }

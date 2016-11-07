@@ -1,5 +1,5 @@
 
-package br.univali.sisnet.persistence;
+package br.univali.sisnet.serialization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,7 +29,6 @@ public class PointToJsonSerializer extends JsonSerializer<Point> {
         jg.writeNumberField("longitude", x);
 
         jg.writeEndObject();
-
 
     }
 
