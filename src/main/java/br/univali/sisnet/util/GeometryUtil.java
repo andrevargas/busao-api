@@ -12,7 +12,7 @@ public class GeometryUtil {
     private static final GeometryFactory geometryFactory =
             new GeometryFactory(new PrecisionModel(), 4674);
 
-    public static Point latLongToPoint (Float latitude, Float longitude) {
+    public static Point latLongToPoint (Double latitude, Double longitude) {
 
         Coordinate coordinate = new Coordinate(latitude, longitude);
 
