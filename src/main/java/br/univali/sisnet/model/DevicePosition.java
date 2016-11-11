@@ -20,7 +20,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "device_position")
 public class DevicePosition implements Serializable {
 
-    private static final long serialVersionUID = 2897509549093274789L;
+    private static final long serialVersionUID = -2119205480067319519L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

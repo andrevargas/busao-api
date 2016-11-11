@@ -12,5 +12,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="br.univali.sisnet.model.DevicePosition"/>
+    <mapping class="br.univali.sisnet.model.BusCompany"/>
+    <mapping class="br.univali.sisnet.model.BusLine"/>
   </session-factory>
 </hibernate-configuration>
