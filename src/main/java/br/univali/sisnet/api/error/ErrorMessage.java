@@ -1,5 +1,5 @@
 
-package br.univali.sisnet.error;
+package br.univali.sisnet.api.error;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 

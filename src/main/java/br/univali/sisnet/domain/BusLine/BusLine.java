@@ -1,38 +1,25 @@
 
-package br.univali.sisnet.model;
+package br.univali.sisnet.domain.BusLine;
 
+import br.univali.sisnet.domain.BusCompany.BusCompany;
+import br.univali.sisnet.domain.EntityBase;
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "bus_line")
-public class BusLine implements Serializable {
+public class BusLine extends EntityBase implements Serializable {
 
     private static final long serialVersionUID = -8099323615585550694L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
 
     private String name;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "bus_company_id")
     private BusCompany busCompany;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

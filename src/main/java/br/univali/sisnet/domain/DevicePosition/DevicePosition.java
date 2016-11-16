@@ -1,16 +1,14 @@
 
-package br.univali.sisnet.model;
+package br.univali.sisnet.domain.DevicePosition;
 
-import br.univali.sisnet.serialization.PointToJsonSerializer;
+import br.univali.sisnet.domain.EntityBase;
+import br.univali.sisnet.infra.serialization.PointToJsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Point;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,13 +16,9 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "device_position")
-public class DevicePosition implements Serializable {
+public class DevicePosition extends EntityBase implements Serializable {
 
     private static final long serialVersionUID = -2119205480067319519L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
 
     @Column(name = "device_id", nullable = true)
     private String deviceId;
@@ -38,15 +32,7 @@ public class DevicePosition implements Serializable {
     @Column(name = "send_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar sendDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public String getDeviceId() {
         return deviceId;
     }

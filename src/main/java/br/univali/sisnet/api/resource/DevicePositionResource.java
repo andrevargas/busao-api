@@ -1,8 +1,9 @@
 
-package br.univali.sisnet.api;
+package br.univali.sisnet.api.resource;
 
-import br.univali.sisnet.model.DevicePosition;
-import br.univali.sisnet.persistence.DevicePositionDAO;
+import br.univali.sisnet.domain.DevicePosition.DevicePosition;
+import br.univali.sisnet.infra.repository.DevicePosition.DevicePositionHibernateRepository;
+import br.univali.sisnet.infra.repository.DevicePosition.DevicePositionRepository;
 import br.univali.sisnet.util.GeometryUtil;
 import com.vividsolutions.jts.geom.Point;
 import java.util.Calendar;
@@ -25,6 +26,10 @@ public class DevicePositionResource {
 
         JSONObject json = new JSONObject(data);
 
+        if (!json.has("latitude") || !json.has("longitude")) {
+            throw new IllegalArgumentException("Latitude e longitude não podem ser nulas.");
+        }
+
         DevicePosition position = new DevicePosition();
 
         position.setDeviceId(json.getString("deviceId"));
@@ -37,8 +42,10 @@ public class DevicePositionResource {
 
         position.setCoordinates(point);
 
-        DevicePositionDAO dao = DevicePositionDAO.getInstance();
-        dao.persist(position);
+        DevicePositionRepository repository =
+                new DevicePositionHibernateRepository();
+
+        repository.persist(position);
 
         return Response.ok().build();
 
@@ -48,9 +55,10 @@ public class DevicePositionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPositions () {
 
-        DevicePositionDAO dao = DevicePositionDAO.getInstance();
+        DevicePositionRepository repository =
+                new DevicePositionHibernateRepository();
 
-        List<DevicePosition> list = dao.findAll();
+        List<DevicePosition> list = repository.findAll();
 
         return Response.ok(list).build();
 
