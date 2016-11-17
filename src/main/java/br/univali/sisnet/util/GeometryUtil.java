@@ -14,7 +14,7 @@ public class GeometryUtil {
 
     public static Point latLongToPoint (Double latitude, Double longitude) {
 
-        Coordinate coordinate = new Coordinate(latitude, longitude);
+        Coordinate coordinate = new Coordinate(longitude, latitude);
 
         Point point = geometryFactory.createPoint(coordinate);
 
