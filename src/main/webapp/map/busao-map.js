@@ -7,7 +7,7 @@
         var center = new google.maps.LatLng(-26.979533, -48.636814),
             mapOptions = {
                 center: center,
-                zoom: 10,
+                zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
